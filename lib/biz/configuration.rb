@@ -14,7 +14,7 @@ module Biz
     end
 
     def holidays
-      raw.holidays.map { |date| Holiday.new(date, time_zone) }
+      raw.holidays.map { |date| Holiday.new(date.to_date, time_zone) }
     end
 
     def time_zone
@@ -70,6 +70,8 @@ module Biz
         self.hours     ||= Default::HOURS
         self.holidays  ||= Default::HOLIDAYS
         self.time_zone ||= Default::TIME_ZONE
+
+        Validation.perform(self)
       end
 
       alias_method :business_hours=, :hours=
