@@ -31,23 +31,7 @@ RSpec.describe Biz::Day do
     let(:epoch_time) { Date.new(2006, 1, 10) }
 
     it 'creates the proper day' do
-      expect(described_class.from_date(epoch_time)).to eq 9
-    end
-  end
-
-  describe '.from_time' do
-    let(:epoch_time) { Time.new(2006, 1, 10) }
-
-    it 'creates the proper day' do
-      expect(described_class.from_time(epoch_time)).to eq 9
-    end
-  end
-
-  describe '.since_epoch' do
-    let(:epoch_time) { Time.new(2006, 1, 10) }
-
-    it 'creates the proper day' do
-      expect(described_class.since_epoch(epoch_time)).to eq 9
+      expect(described_class.from_date(epoch_time).to_i).to eq 9
     end
   end
 
@@ -57,41 +41,9 @@ RSpec.describe Biz::Day do
     end
   end
 
-  describe '#to_s' do
-    it 'returns the day since epoch' do
-      expect(day.to_s).to eq 9.to_s
-    end
-  end
-
-  describe '#to_int' do
-    it 'returns the day since epoch' do
-      expect(day.to_int).to eq 9
-    end
-  end
-
   describe '#to_i' do
     it 'returns the day since epoch' do
       expect(day.to_i).to eq 9
-    end
-  end
-
-  context 'when performing comparison' do
-    context 'and the compared object does not respond to #to_i' do
-      it 'raises an argument error' do
-        expect { day < Object.new }.to raise_error ArgumentError
-      end
-    end
-
-    context 'and the compared object responds to #to_i' do
-      it 'compares as expected' do
-        expect(day > 5).to eq true
-      end
-    end
-
-    context 'and the comparing object is an integer' do
-      it 'compares as expected' do
-        expect(5 < day).to eq true
-      end
     end
   end
 end
