@@ -23,16 +23,8 @@ module Biz
       Duration.new(end_time - start_time)
     end
 
-    def endpoints
-      [start_time, end_time]
-    end
-
     def empty?
       start_time >= end_time
-    end
-
-    def contains?(time)
-      (start_time..end_time).cover?(time)
     end
 
     def &(other)
@@ -40,13 +32,6 @@ module Biz
         lower_bound(other),
         [lower_bound(other), upper_bound(other)].max
       )
-    end
-
-    def /(other)
-      [
-        self.class.new(start_time, other.start_time),
-        self.class.new(other.end_time, end_time)
-      ].reject(&:empty?).map { |potential| self & potential }
     end
 
     private
