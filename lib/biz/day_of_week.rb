@@ -1,7 +1,7 @@
 module Biz
   class DayOfWeek
 
-    SYMBOLS = [:sun, :mon, :tue, :wed, :thu, :fri, :sat]
+    SYMBOLS = %i(sun mon tue wed thu fri sat)
 
     def self.from_time(time)
       DAYS.fetch(time.wday)
